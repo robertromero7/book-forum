@@ -2,6 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import Books from './Books.jsx'
 
 function App() {
 
@@ -12,34 +13,27 @@ function App() {
     <div class = "main">
       <header>
         
-          <a href="/">BOOK LIBRARY</a>
+          <a href="/" id = "header">BOOK LIBRARY</a>
           <form id = "search">
               <input type = "search"></input>
+              <button id = "searchButton"> Search </button>
           </form>
       </header>
           <section id = "sidenav">
             <h1>Search By:</h1>
-            <span>Highest Rated</span>
+            <a href="/">Highest Rated</a>
             <br></br>
-            <span>Popularity</span>
+            <a href="/">Popularity</a>
             <br></br>
-            <span>Page Count</span>
+            <a href="/">Page Count</a>
             <br></br>
-            <span>Cost</span>
+            <a href="/">Cost</a>
             <br></br>
            
           </section>
 
         <section id = "books">
-          <h1>Booksss</h1>
-            <img src="https://th.bing.com/th/id/OIP.zrAI1U-8xQqTUWkQ0_lY2AHaLH?w=194&h=291&c=7&r=0&o=5&dpr=1.5&pid=1.7"></img>
-            <img src="https://th.bing.com/th/id/OIP.zrAI1U-8xQqTUWkQ0_lY2AHaLH?w=194&h=291&c=7&r=0&o=5&dpr=1.5&pid=1.7"></img>
-            <img src="https://th.bing.com/th/id/OIP.zrAI1U-8xQqTUWkQ0_lY2AHaLH?w=194&h=291&c=7&r=0&o=5&dpr=1.5&pid=1.7"></img>
-            <img src="https://th.bing.com/th/id/OIP.zrAI1U-8xQqTUWkQ0_lY2AHaLH?w=194&h=291&c=7&r=0&o=5&dpr=1.5&pid=1.7"></img>
-            <img src="https://th.bing.com/th/id/OIP.zrAI1U-8xQqTUWkQ0_lY2AHaLH?w=194&h=291&c=7&r=0&o=5&dpr=1.5&pid=1.7"></img>
-            <img src="https://th.bing.com/th/id/OIP.zrAI1U-8xQqTUWkQ0_lY2AHaLH?w=194&h=291&c=7&r=0&o=5&dpr=1.5&pid=1.7"></img>
-            <img src="https://th.bing.com/th/id/OIP.zrAI1U-8xQqTUWkQ0_lY2AHaLH?w=194&h=291&c=7&r=0&o=5&dpr=1.5&pid=1.7"></img>
-            <img src="https://th.bing.com/th/id/OIP.zrAI1U-8xQqTUWkQ0_lY2AHaLH?w=194&h=291&c=7&r=0&o=5&dpr=1.5&pid=1.7"></img>
+          <Books />
           </section>
       </div>
       </>

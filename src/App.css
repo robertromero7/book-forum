@@ -10,16 +10,18 @@ header{
 }
 
 #search{
+
   float: right;
   font-size: 20px;
-  padding-right: 5%;
+  padding-right: 3%;
 }
 
-a{
+
+header{
   
   font-size: 30px;
   text-decoration: none;
-  padding-left: 45%;
+  padding-left: 40%;
 
 }
 
