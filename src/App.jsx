@@ -3,6 +3,9 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Books from './Books.jsx'
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import BookDetails from './bookDetails.jsx'
 
 function App() {
 
@@ -33,9 +36,16 @@ function App() {
           </section>
 
         <section id = "books">
-          <Books />
+          
           </section>
       </div>
+      <Router>
+        <Routes>
+        <Route path="/" element={<Books />} />
+        <Route path="/book/:id" element={<BookDetails />} />
+        </Routes>
+        </Router>
+      
       </>
   )
 }

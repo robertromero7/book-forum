@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import App from './App.jsx'
+import { Link } from "react-router-dom";
+
 
 
 const BookSearch = () => {
@@ -37,17 +39,31 @@ const BookSearch = () => {
       {loading && <p>...</p>}
       <ul style={{ listStyleType: "none", padding: 0 }}>
         {books.map((book) => (
-          <li key={book.key} style={{ margin: "10px 0" }}>
-            <div>
-                <img
+          
+          <li key={book.key} style={{ margin: "10px 0" }} id = "listBooks">
+            
+            <div class ="cards" style={{ display: "inline"}}>
+                
+                
+                        <Link to={`/book/${book.key}`}>
+              <img
+                src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
+                alt={book.title}
+                style={{ width: "100px", marginTop: "10px", padding: "0" }}
+              />
+            </Link>
+                
+                
+                {/* <img
                   src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
-                  alt={book.title}
-                  style={{ width: "100px", marginTop: "10px" }}
-                />
+                  alt={'book.title'}
+                   style={{ width: "100px", marginTop: "10px", padding:"0"}}
+                /> */}
+                <strong>{book.title}</strong> by {book.author_name?.join(", ") || "Unknown"}
+                <br />
+                <small> First published: {book.first_publish_year || "N/A"}</small>
               </div>
-            <strong>{book.title}</strong> by {book.author_name?.join(", ") || "Unknown"}
-            <br />
-            <small>First published: {book.first_publish_year || "N/A"}</small>
+            
           </li>
         ))}
       </ul>
@@ -56,16 +72,3 @@ const BookSearch = () => {
 };
 
 export default BookSearch;
-
-
-// function Books() {
-
-//     return (
-//         <>
-//             <h1>BooOoOoOOOks</h1>
-//         </>
-
-//   )}
-  
-//   export default Books
-  
