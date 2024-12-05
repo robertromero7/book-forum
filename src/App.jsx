@@ -5,7 +5,7 @@ import './App.css'
 import Books from './Books.jsx'
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import BookDetails from './bookDetails.jsx'
+import BookDetails from './BookDetails.jsx'
 
 function App() {
 
@@ -13,7 +13,7 @@ function App() {
   return (
     <>
     
-    <div class = "main">
+    <div className = "main">
       <header>
         
           <a href="/" id = "header">BOOK LIBRARY</a>
@@ -35,17 +35,18 @@ function App() {
            
           </section>
 
+          
         <section id = "books">
           
           </section>
       </div>
       <Router>
-        <Routes>
-        <Route path="/" element={<Books />} />
+      <Routes>
+        <Route path="/" element={<Books />} /> {/* Updated to Books */}
         <Route path="/book/:id" element={<BookDetails />} />
-        </Routes>
-        </Router>
-      
+        <Route path="*" element={<p>404: Page not found</p>} />
+      </Routes>
+    </Router>
       </>
   )
 }

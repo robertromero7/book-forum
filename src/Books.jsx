@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import App from './App.jsx'
 import { Link } from "react-router-dom";
 
-
-
-const BookSearch = () => {
+const Books = () => {
   const [query, setQuery] = useState("");
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -36,34 +33,22 @@ const BookSearch = () => {
       <button onClick={searchBooks} style={{ padding: "8px 16px", marginLeft: "10px" }}>
         Search
       </button>
-      {loading && <p>...</p>}
+      {loading && <p>Loading...</p>}
       <ul style={{ listStyleType: "none", padding: 0 }}>
         {books.map((book) => (
-          
-          <li key={book.key} style={{ margin: "10px 0" }} id = "listBooks">
-            
-            <div class ="cards" style={{ display: "inline"}}>
-                
-                
-                        <Link to={`/book/${book.key}`}>
-              <img
-                src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
-                alt={book.title}
-                style={{ width: "100px", marginTop: "10px", padding: "0" }}
-              />
-            </Link>
-                
-                
-                {/* <img
-                  src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
-                  alt={'book.title'}
-                   style={{ width: "100px", marginTop: "10px", padding:"0"}}
-                /> */}
-                <strong>{book.title}</strong> by {book.author_name?.join(", ") || "Unknown"}
-                <br />
-                <small> First published: {book.first_publish_year || "N/A"}</small>
-              </div>
-            
+          <li key={book.key} style={{ margin: "10px 0" }}>
+            <div>
+                <Link to={`/book/${book.key.split("/").pop()}?coverId=${book.cover_i}`}>
+                  <img
+                    src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
+                    alt={book.title}
+                    style={{ width: "100px", marginTop: "10px", padding: "0" }}
+                  />
+                </Link>
+              <strong>{book.title}</strong> by {book.author_name?.join(", ") || "Unknown"}
+              <br />
+              <small>First published: {book.first_publish_year || "N/A"}</small>
+            </div>
           </li>
         ))}
       </ul>
@@ -71,4 +56,4 @@ const BookSearch = () => {
   );
 };
 
-export default BookSearch;
+export default Books;
