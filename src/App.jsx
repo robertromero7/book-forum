@@ -5,10 +5,14 @@ import './App.css'
 import Books from './Books.jsx'
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import BookDetails from './BookDetails.jsx'
+import BookDetails from './bookDetails.jsx';
 
 function App() {
 
+  // fetch('http://localhost:3000/api/data')
+  // .then(response => response.json())
+  // .then(data => console.log(data))
+  // .catch(error => console.error('Error:Yeahhh not found', error));
 
   return (
     <>
