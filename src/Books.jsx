@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import App from "./App";
 
 const Books = () => {
   const [query, setQuery] = useState("");
@@ -23,16 +24,17 @@ const Books = () => {
 
   return (
     <div style={{ padding: "20px", fontFamily: "Arial" }}>
+      <button onClick={searchBooks} style={{ padding: "8px 16px", marginLeft: "10px",float: "right" }}>
+        Search
+      </button>
       <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Enter book title"
-        style={{ padding: "8px", width: "300px" }}
+        style={{ padding: "8px", width: "300px", float: "right"}}
       />
-      <button onClick={searchBooks} style={{ padding: "8px 16px", marginLeft: "10px" }}>
-        Search
-      </button>
+      
       {loading && <p>Loading...</p>}
       <ul style={{ listStyleType: "none", padding: 0 }}>
         {books.map((book) => (

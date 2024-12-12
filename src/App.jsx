@@ -21,10 +21,6 @@ function App() {
       <header>
         
           <a href="/" id = "header">BOOK LIBRARY</a>
-          <form id = "search">
-              <input type = "search"></input>
-              <button id = "searchButton"> Search </button>
-          </form>
       </header>
           <section id = "sidenav">
             <h1>Search By:</h1>
@@ -42,7 +38,7 @@ function App() {
           
         <section id = "books">
           
-          </section>
+        </section>
       </div>
       <Router>
       <Routes>
@@ -51,6 +47,7 @@ function App() {
         <Route path="*" element={<p>404: Page not found</p>} />
       </Routes>
     </Router>
+    
       </>
   )
 }

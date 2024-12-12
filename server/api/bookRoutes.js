@@ -1,8 +1,9 @@
 const express = require('express');
-const { getReviews } = require('../controllers/reviewController'); // Import the review controller
+const { getReviews, addReview } = require('../controllers/reviewController');
+
 const router = express.Router();
 
-// Route to fetch reviews for a book by _bookId
-router.get('/books/:id/reviews', getReviews);  // `id` here refers to the Open Library book ID passed in URL
+router.get('/:id/reviews', getReviews);
+router.post('/:id/reviews', addReview);
 
 module.exports = router;
