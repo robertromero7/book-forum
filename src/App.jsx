@@ -24,6 +24,7 @@ function App() {
       </header>
           <section id = "sidenav">
             <h1>Search By:</h1>
+            <br></br>
             <a href="/">Highest Rated</a>
             <br></br>
             <a href="/">Popularity</a>
