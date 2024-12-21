@@ -12,7 +12,6 @@ const BookReviews = ({ bookId }) => {
     const fetchReviews = async () => {
         try {
           const response = await axios.get(`http://localhost:5000/api/books/${bookId}/reviews`);
-          console.log(bookId);
           setReviews(response.data); // Set reviews if found
         } catch (err) {
           if (err.response && err.response.status === 404) {

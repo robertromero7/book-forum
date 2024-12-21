@@ -70,11 +70,11 @@ const Books = () => {
           <div
             key={book.key}
             style={{
-              border: "1px 2px 5px rgb(0, 0, 0)",
+              border: "1px solid #ddd",
               borderRadius: "8px",
               padding: "10px",
               textAlign: "center",
-              boxShadow: "0 2px 5px rgb(255, 255, 255)",
+              boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
             }}
           >
             <Link to={`/book/${book.key.split("/").pop()}?coverId=${book.cover_i}`}>
