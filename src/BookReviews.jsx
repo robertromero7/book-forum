@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './BookReviews.css'; // Import your CSS file
 
 const BookReviews = ({ bookId }) => {
   const [reviews, setReviews] = useState([]);
@@ -54,15 +55,18 @@ const BookReviews = ({ bookId }) => {
   return (
     <div>
       {reviews.length > 0 ? (
-        reviews.map((review) => (
-          <div key={review._id}>
-            <p>{review._review}</p>
-            <small>Posted on: {new Date(review.createdAt).toLocaleDateString()}</small>
-          </div>
-        ))
+        <div className="reviews-grid">
+          {reviews.map((review) => (
+            <div key={review._id} className="review-item">
+              <p>{review._review}</p>
+              <small>Posted on: {new Date(review.createdAt).toLocaleDateString()}</small>
+            </div>
+          ))}
+        </div>
       ) : (
         <p>No reviews available for this book.</p>
       )}
+
       <form onSubmit={handleSubmit}>
         <textarea
           value={reviewContent}

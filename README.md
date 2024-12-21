@@ -1,6 +1,11 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## This is a website that allows people to browse a large collection of books and find out what the book is about and read other peoples thoughts on the book. Its goal to help people find book recommendations and also discuss books they like with others. 
+
+*Uses library genisis API
+*MONGODB database connection for reviews
+*Server runs on port 5000
+*Front end on port 5173
 
 Currently, two official plugins are available:
 
