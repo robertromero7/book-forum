@@ -1,72 +1,68 @@
-const { MongoClient } = require('mongodb');
+// const { MongoClient } = require('mongodb');
 
-// MongoDB client setup (use environment variable for production)
-const client = new MongoClient(process.env.MONGO_URI);
+// const client = new MongoClient(process.env.MONGO_URI);
+// let database;
 
-let database;
+// const connectToDatabase = async () => {
+//   if (!database) {
+//     await client.connect();
+//     database = client.db('books'); // Replace with your database name
+//   }
+// };
 
-// Initialize database connection once
-const connectToDatabase = async () => {
-  if (!database) {
-    await client.connect();
-    database = client.db('books'); // Replace 'books' with your database name
-  }
-};
+// const getReviews = async (req, res) => {
+//   const { id } = req.params;
 
-// Function to get reviews for a specific bookId (_bookId)
-const getReviews = async (req, res) => {
-    const { id } = req.params; // Get the bookId from the URL
-  
-    try {
-      // Ensure database is connected
-      await connectToDatabase();
-      const reviewsCollection = database.collection('reviews'); // Replace with your collection name
-  
-      // Find reviews where _bookId matches the passed bookId
-      const reviews = await reviewsCollection.find({ _bookId: id }).toArray();
-  
-      if (reviews.length === 0) {
-        // No reviews found, send a proper response
-        return res.status(200).json({ message: 'No reviews found for this book.' });
-      }
-  
-      // Return the reviews if found
-      return res.status(200).json(reviews);
-    } catch (err) {
-      console.error("Error fetching reviews:", err);
-      return res.status(500).json({ error: 'An error occurred while fetching reviews.' });
-    }
-  };
-  
+//   try {
+//     await connectToDatabase();
+//     const book = await database.collection('books').findOne({ _id: id });
 
-// Function to add a new review
-const addReview = async (req, res) => {
-    const { id } = req.params; // Book ID from the URL
-    const { content } = req.body; // Review content from the request body
-  
-    if (!content) {
-      return res.status(400).json({ message: 'Review content is required.' });
-    }
-  
-    try {
-      await connectToDatabase(); // Ensure the database connection is established
-      const reviewsCollection = database.collection('reviews');
-  
-      // Create a new review object
-      const newReview = {
-        _bookId: id, // Associate the review with the book ID
-        _review: content,
-        createdAt: new Date(),
-      };
-  
-      // Insert the review into the database
-      const result = await reviewsCollection.insertOne(newReview);
-  
-      // Respond with success and the newly added review
-      res.status(201).json({ message: 'Review added successfully.', review: result.ops[0] });
-    } catch (err) {
-      console.error('Error adding review:', err);
-      res.status(500).json({ error: 'An error occurred while adding the review.' });
-    }
-  };
-  
+//     if (!book) {
+//       return res.status(404).json({ error: 'Book not found.' });
+//     }
+
+//     return res.status(200).json(book.reviews || []);
+//   } catch (err) {
+//     console.error('Error fetching reviews:', err);
+//     return res.status(500).json({ error: 'An error occurred while fetching reviews.' });
+//   }
+// };
+
+// const addReview = async (req, res) => {
+//   const { id } = req.params; // `_bookId` passed in the URL as `id`
+//   const { _review } = req.body; // `_review` content from the request body
+
+//   if (!_review) {
+//     return res.status(400).json({ error: 'Review content (_review) is required.' });
+//   }
+
+//   try {
+//     // Ensure database connection
+//     await connectToDatabase();
+
+//     const newReview = {
+//       _bookId: id,
+//       _review,
+//       createdAt: new Date()
+//     };
+
+//     // Push the new review to the book's reviews array
+//     const result = await database
+//       .collection('books')
+//       .updateOne(
+//         { _id: id }, // Match the book by `_id`
+//         { $push: { reviews: newReview } } // Add the new review to the `reviews` array
+//       );
+
+//     if (result.matchedCount === 0) {
+//       return res.status(404).json({ error: 'Book not found.' });
+//     }
+
+//     return res.status(201).json({ message: 'Review added successfully.', review: newReview });
+//   } catch (err) {
+//     console.error('Error adding review:', err);
+//     return res.status(500).json({ error: 'An error occurred while adding the review.' });
+//   }
+// };
+
+// module.exports = { getReviews, addReview };

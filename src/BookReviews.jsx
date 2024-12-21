@@ -10,34 +10,33 @@ const BookReviews = ({ bookId }) => {
   // Fetch reviews from the backend
   useEffect(() => {
     const fetchReviews = async () => {
-        try {
-          const response = await axios.get(`http://localhost:5000/api/books/${bookId}/reviews`);
-          setReviews(response.data); // Set reviews if found
-        } catch (err) {
-          if (err.response && err.response.status === 404) {
-            // No reviews found
-            setReviews([]); // Set an empty array for no reviews
-          } else {
-            console.error('Error fetching reviews:', err);
-            setError('Error fetching reviews.');
-          }
-        } finally {
-          setLoading(false);
+      try {
+        const response = await axios.get(`http://localhost:5000/api/books/${bookId}/reviews`);
+        console.log('Fetched reviews:', response.data); // Debugging log to check data format
+        setReviews(response.data); // Set reviews if found
+      } catch (err) {
+        if (err.response && err.response.status === 404) {
+          setReviews([]); // No reviews found
+        } else {
+          console.error('Error fetching reviews:', err);
+          setError('Error fetching reviews.');
         }
-      };
-      
+      } finally {
+        setLoading(false);
+      }
+    };
 
     fetchReviews();
-  }, [bookId]);
+  }, [bookId]); // Re-run effect if `bookId` changes
 
   // Handle form submission for adding a new review
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!reviewContent) return;
+    if (!reviewContent) return; // Don't submit if no review content
 
     try {
       const response = await axios.post(`http://localhost:5000/api/books/${bookId}/reviews`, {
-        content: reviewContent,
+        content: reviewContent, // Send review content
       });
 
       // Update reviews list with the new review
@@ -51,7 +50,7 @@ const BookReviews = ({ bookId }) => {
 
   if (loading) return <p>Loading reviews...</p>;
   if (error) return <p>{error}</p>;
-  
+
   return (
     <div>
       {reviews.length > 0 ? (
@@ -75,16 +74,6 @@ const BookReviews = ({ bookId }) => {
       </form>
     </div>
   );
-  
-        {reviews.length > 0 ? (
-          reviews.map((review) => (
-            <div key={review._id}>
-              <p>{review._review}</p>
-            </div>
-          ))
-        ) : (
-          <p>No reviews available for this book.</p>
-        )}
 };
 
 export default BookReviews;

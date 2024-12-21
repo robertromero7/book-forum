@@ -1,9 +1,10 @@
-const express = require('express');
-const { getReviews, addReview } = require('../controllers/reviewController');
+// const express = require('express');
+// const { addReview, getReviews } = require('../controllers/reviewController'); // Adjust paths
 
-const router = express.Router();
+// const router = express.Router();
 
-router.get('/:id/reviews', getReviews);
-router.post('/:id/reviews', addReview);
+// // Routes
+// router.post('/:id/reviews', addReview); // POST to add a review
+// router.get('/:id/reviews', getReviews); // GET to fetch reviews
 
-module.exports = router;
+// module.exports = router;

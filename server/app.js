@@ -1,40 +1,43 @@
-app.get('/', (req, res) => {
-    res.send('Server is running correctly!');
-  });
+require('dotenv').config(); // This will load environment variables from the .env file
+console.log('Mongo URI:', process.env.MONGO_URI); // Add this line to verify the URI
+console.log('Environment Variables:', process.env);
 
 const express = require('express');
-const { MongoClient } = require('mongodb');
-const cors = require('cors');
+const mongoose = require('mongoose');
+const cors = require('cors'); // Import CORS middleware
+const booksRoutes = require('./api/books/books.routes'); // Your routes file
 
 const app = express();
+
+// Middleware
 app.use(express.json());
+app.use(cors()); // Enable CORS for all origins (you can restrict it if needed)
 
-app.use(cors());
-
-const client = new MongoClient('your_connection_string', { useNewUrlParser: true, useUnifiedTopology: true });
-const dbName = 'books';
-
-
-
-app.get('/books', async (req, res) => {
-  try {
-    await client.connect();
-    const db = client.db(dbName);
-    const books = await db.collection('books').find({}).toArray();
-    res.json(books);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Error fetching data');
-  } finally {
-    await client.close();
-  }
+// MongoDB connection setup
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 30000, // Timeout after 30 seconds if server is not found
 });
 
-const PORT = 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Event listeners to log connection status
+mongoose.connection.on('connected', () => {
+  console.log('MongoDB connected');
+});
 
+mongoose.connection.on('error', (err) => {
+  console.error('MongoDB connection error:', err);
+});
 
+mongoose.connection.on('disconnected', () => {
+  console.log('MongoDB disconnected');
+});
 
+// Routes
+app.use('/api/books', booksRoutes);
 
-
-
+// Start the server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
